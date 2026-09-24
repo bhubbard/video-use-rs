@@ -1,1 +1,8 @@
 /target
+.env
+.env.*
+!.env.example
+edit/
+*.mp4
+*.wav
+*.png
