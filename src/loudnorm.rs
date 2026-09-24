@@ -16,6 +16,33 @@ pub struct LoudnormMeasurement {
     pub target_offset: String,
 }
 
+pub fn parse_loudnorm_stderr(stderr: &str) -> Option<LoudnormMeasurement> {
+    let start = stderr.rfind('{')?;
+    let end = stderr.rfind('}')?;
+    if end <= start {
+        return None;
+    }
+
+    let json_str = &stderr[start..=end];
+    let val: serde_json::Value = serde_json::from_str(json_str).ok()?;
+
+    let get_str = |key: &str| -> Option<String> {
+        val.get(key).map(|v| match v {
+            serde_json::Value::String(s) => s.clone(),
+            serde_json::Value::Number(n) => n.to_string(),
+            _ => v.to_string(),
+        })
+    };
+
+    Some(LoudnormMeasurement {
+        input_i: get_str("input_i")?,
+        input_tp: get_str("input_tp")?,
+        input_lra: get_str("input_lra")?,
+        input_thresh: get_str("input_thresh")?,
+        target_offset: get_str("target_offset")?,
+    })
+}
+
 pub fn measure_loudness(video_path: &Path) -> Result<Option<LoudnormMeasurement>> {
     let filter_str = format!(
         "loudnorm=I={:.1}:TP={:.1}:LRA={:.1}:print_format=json",
@@ -42,57 +69,7 @@ pub fn measure_loudness(video_path: &Path) -> Result<Option<LoudnormMeasurement>
         .with_context(|| format!("Failed to run loudness measurement on {:?}", video_path))?;
 
     let stderr = String::from_utf8_lossy(&output.stderr);
-    let start = match stderr.rfind('{') {
-        Some(s) => s,
-        None => return Ok(None),
-    };
-    let end = match stderr.rfind('}') {
-        Some(e) if e > start => e,
-        _ => return Ok(None),
-    };
-
-    let json_str = &stderr[start..=end];
-    let val: serde_json::Value = match serde_json::from_str(json_str) {
-        Ok(v) => v,
-        Err(_) => return Ok(None),
-    };
-
-    let get_str = |key: &str| -> Option<String> {
-        val.get(key).map(|v| match v {
-            serde_json::Value::String(s) => s.clone(),
-            serde_json::Value::Number(n) => n.to_string(),
-            _ => v.to_string(),
-        })
-    };
-
-    let input_i = match get_str("input_i") {
-        Some(v) => v,
-        None => return Ok(None),
-    };
-    let input_tp = match get_str("input_tp") {
-        Some(v) => v,
-        None => return Ok(None),
-    };
-    let input_lra = match get_str("input_lra") {
-        Some(v) => v,
-        None => return Ok(None),
-    };
-    let input_thresh = match get_str("input_thresh") {
-        Some(v) => v,
-        None => return Ok(None),
-    };
-    let target_offset = match get_str("target_offset") {
-        Some(v) => v,
-        None => return Ok(None),
-    };
-
-    Ok(Some(LoudnormMeasurement {
-        input_i,
-        input_tp,
-        input_lra,
-        input_thresh,
-        target_offset,
-    }))
+    Ok(parse_loudnorm_stderr(&stderr))
 }
 
 pub fn apply_loudnorm_two_pass(

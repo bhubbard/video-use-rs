@@ -210,15 +210,44 @@ fn main() -> anyhow::Result<()> {
 
 ---
 
-## Testing
+## Testing & Code Coverage
 
-Run the full unit and integration test suite:
+### Run Tests
+
+Run the full test suite across all targets:
 
 ```bash
 cargo test
 ```
 
-All 31 test cases (matching and expanding on `test_render_captions.py`, `test_render_orientation.py`, `test_render_fps.py`, and transcript packaging) are verified.
+All 37 unit and integration tests (covering EDL deserialization, rational FPS parsing, orientation detection, Scribe path resolution, loudness normalization, audio peak checks, and caption chunking) are verified.
+
+### Code Coverage
+
+Code coverage is powered by [`cargo-llvm-cov`](https://github.com/taiki-e/cargo-llvm-cov) leveraging LLVM source-based code coverage.
+
+1. **Install toolchain components and cargo-llvm-cov**:
+   ```bash
+   rustup component add llvm-tools-preview
+   cargo install cargo-llvm-cov --locked
+   ```
+
+2. **Run code coverage in terminal**:
+   ```bash
+   cargo llvm-cov
+   ```
+
+3. **Generate an interactive HTML coverage report**:
+   ```bash
+   cargo llvm-cov --html --open
+   ```
+
+4. **Export LCOV for CI**:
+   ```bash
+   cargo llvm-cov --lcov --output-path lcov.info
+   ```
+
+Automated CI runs on every push and pull request via GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)), executing tests, generating coverage summaries in the job summary, and uploading HTML and LCOV coverage artifacts.
 
 ---
 
