@@ -6,3 +6,7 @@ edit/
 *.mp4
 *.wav
 *.png
+!static/*.png
+!docs/static/*.png
+!static/**/*.png
+!docs/static/**/*.png
