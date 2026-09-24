@@ -3,11 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>video-use-rs — Fast Rust Port of video-use</title>
-  <meta name="description" content="A fast, production-grade Rust port of browser-use/video-use. Edit videos with coding agents using transcription, silence-gap phrase grouping, automatic color grading, lossless rendering, and visual timeline drill-downs.">
+  
+  <!-- Primary Meta Tags -->
+  <title>video-use-rs — Fast Rust Port of video-use | AI Video Editing with Coding Agents</title>
+  <meta name="title" content="video-use-rs — Fast Rust Port of video-use | AI Video Editing with Coding Agents">
+  <meta name="description" content="Edit videos with AI coding agents using video-use-rs, a fast Rust port of browser-use/video-use. Speech-to-text, phrase packing, lossless concat, and auto color grading.">
+  <meta name="keywords" content="video-use, video-use-rs, browser-use, rust video editing, ai video editor, claude code video, ffmpeg rust, elevenlabs scribe, edl video rendering, speech to text video editor, automated video editing">
+  <meta name="author" content="Brandon Hubbard">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="theme-color" content="#0d0f12">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://bhubbard.github.io/video-use-rs/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bhubbard.github.io/video-use-rs/">
+  <meta property="og:site_name" content="video-use-rs">
+  <meta property="og:title" content="video-use-rs — Fast Rust Port of video-use">
+  <meta property="og:description" content="Edit videos with coding agents using transcription, silence-gap phrase grouping, automatic color grading, lossless rendering, and visual timeline drill-downs.">
+  <meta property="og:image" content="https://bhubbard.github.io/video-use-rs/static/video-use-banner.png">
+  <meta property="og:image:secure_url" content="https://bhubbard.github.io/video-use-rs/static/video-use-banner.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1894">
+  <meta property="og:image:height" content="1352">
+  <meta property="og:image:alt" content="video-use-rs banner showcasing AI video editing in Rust">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://bhubbard.github.io/video-use-rs/">
+  <meta name="twitter:title" content="video-use-rs — Fast Rust Port of video-use">
+  <meta name="twitter:description" content="Edit videos with coding agents using transcription, silence-gap phrase grouping, automatic color grading, lossless rendering, and visual timeline drill-downs.">
+  <meta name="twitter:image" content="https://bhubbard.github.io/video-use-rs/static/video-use-banner.png">
+  <meta name="twitter:image:alt" content="video-use-rs banner">
+
+  <!-- Performance & Preload Hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="static/video-use-banner.png" fetchpriority="high">
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -32,6 +70,7 @@
       }
     }
   </script>
+
   <style>
     body {
       background-color: #0d0f12;
@@ -40,73 +79,151 @@
     .code-glow {
       box-shadow: 0 0 50px -10px rgba(249, 115, 22, 0.15);
     }
-    .gradient-border {
-      position: relative;
-      border-radius: 0.75rem;
-      background: linear-gradient(135deg, rgba(255,107,53,0.3) 0%, rgba(255,255,255,0.05) 50%, rgba(255,107,53,0.1) 100%);
-      padding: 1px;
+    details > summary::-webkit-details-marker {
+      display: none;
     }
   </style>
+
+  <!-- Structured Data: Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://bhubbard.github.io/video-use-rs/#website",
+        "url": "https://bhubbard.github.io/video-use-rs/",
+        "name": "video-use-rs",
+        "description": "Fast conversation-driven video editing toolkit in Rust for AI coding agents",
+        "publisher": {
+          "@type": "Person",
+          "name": "Brandon Hubbard"
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://bhubbard.github.io/video-use-rs/#software",
+        "name": "video-use-rs",
+        "operatingSystem": "macOS, Linux, Windows",
+        "applicationCategory": "MultimediaApplication, DeveloperApplication",
+        "softwareVersion": "0.1.0",
+        "programmingLanguage": "Rust",
+        "license": "https://opensource.org/licenses/MIT",
+        "description": "A high-performance Rust port of browser-use/video-use. Provides single-binary CLI and embeddable Rust crate for conversation-driven video editing using ElevenLabs Scribe, phrase packing, lossless concat, and automatic grading.",
+        "url": "https://bhubbard.github.io/video-use-rs/",
+        "downloadUrl": "https://github.com/bhubbard/video-use-rs",
+        "codeRepository": "https://github.com/bhubbard/video-use-rs",
+        "author": {
+          "@type": "Person",
+          "name": "Brandon Hubbard"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://bhubbard.github.io/video-use-rs/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is video-use-rs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "video-use-rs is a high-performance Rust port of browser-use/video-use. It allows developers and AI coding agents (such as Claude Code, Codex, and Antigravity) to edit videos conversationally using word-level transcripts, silence-gap cut candidates, lossless concatenation, and automated color grading."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does an LLM edit video without watching every frame?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The LLM reads a structured 12KB phrase-level transcript (takes_packed.md) derived from speech-to-text with word timestamps and silence boundaries. When visual ambiguity arises, it triggers timeline-view on demand to inspect a compact composite PNG of filmstrip frames, waveform audio envelopes, and silence gaps, avoiding the need to process tens of millions of raw video tokens."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why rewrite video-use in Rust?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Porting video-use to Rust replaces multiple Python scripts and heavy dependency trees with a single standalone binary and an embeddable crate. It delivers faster cold starts, parallel worker batch transcription using Rayon, memory safety, zero-dependency deployment, and seamless integration into native systems."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the 12 Hard Rules for video rendering?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The 12 Hard Rules enforce production correctness: subtitles applied last in the filter chain, per-segment extract with lossless concat to avoid double encoding, 30ms audio fades at every cut boundary to prevent pops, PTS-shifted animation overlays, output-timeline subtitle offsets, never cutting inside a word, and two-pass social loudness normalization."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="selection:bg-brand-500 selection:text-white">
 
   <!-- Nav -->
   <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0d0f12]/80 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-amber-600 flex items-center justify-center font-mono font-bold text-white shadow-lg shadow-brand-500/20">
+      <a href="#" class="flex items-center gap-3 group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-amber-600 flex items-center justify-center font-mono font-bold text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
           🦀
         </span>
         <span class="font-extrabold text-lg tracking-tight text-white">video-use<span class="text-brand-500">-rs</span></span>
-      </div>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-400">
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-400" aria-label="Main Navigation">
         <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
-        <a href="#cli" class="hover:text-white transition-colors">CLI Commands</a>
+        <a href="#cli" class="hover:text-white transition-colors">CLI Suite</a>
         <a href="#rules" class="hover:text-white transition-colors">Hard Rules</a>
-        <a href="#architecture" class="hover:text-white transition-colors">Architecture</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
       </nav>
       <div class="flex items-center gap-4">
         <a href="https://github.com/bhubbard/video-use-rs" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-white/10 hover:bg-white/15 text-white border border-white/10 transition-all">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>Star on GitHub</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden pt-20 pb-16 md:pt-28 md:pb-24 border-b border-white/5">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-500/10 via-transparent to-transparent pointer-events-none"></div>
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 font-mono text-xs font-semibold uppercase tracking-wider mb-6">
-        <span>⚡ 100% Rust Port of browser-use/video-use</span>
-      </div>
-      <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-        Edit Videos with Coding Agents.<br>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-amber-300 to-brand-500">
-          Re-engineered in Rust.
-        </span>
-      </h1>
-      <p class="text-lg md:text-xl text-stone-400 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
-        Drop raw footage into a folder. Your AI agent transcribes, reads speech boundaries, grades color, cuts dead air, and renders frame-perfect video with 30ms audio anti-pop fades.
-      </p>
-
-      <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
-        <a href="#cli" class="px-6 py-3 rounded-lg bg-gradient-to-r from-brand-500 to-amber-600 hover:from-brand-600 hover:to-amber-700 text-white font-semibold text-sm shadow-lg shadow-brand-500/25 transition-all">
-          Explore CLI Commands
-        </a>
-        <a href="https://github.com/bhubbard/video-use-rs" class="px-6 py-3 rounded-lg bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 transition-all">
-          View on GitHub
-        </a>
-      </div>
-
-      <!-- Quick terminal preview -->
-      <div class="max-w-2xl mx-auto text-left rounded-xl bg-stone-900 border border-stone-800 p-5 code-glow">
-        <div class="flex items-center justify-between pb-3 mb-3 border-b border-stone-800 text-xs text-stone-500 font-mono">
-          <span>bash — terminal</span>
-          <span class="text-emerald-400">● 31 tests passing</span>
+  <main>
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-20 pb-16 md:pt-28 md:pb-24 border-b border-white/5">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-500/10 via-transparent to-transparent pointer-events-none"></div>
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 font-mono text-xs font-semibold uppercase tracking-wider mb-6">
+          <span>⚡ High-Performance Rust Port of browser-use/video-use</span>
         </div>
-        <pre class="font-mono text-xs md:text-sm text-stone-300 leading-relaxed overflow-x-auto"><code><span class="text-stone-500"># Transcribe batch with parallel workers</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
+          Edit Videos with Coding Agents.<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-amber-300 to-brand-500">
+            Engineered in Pure Rust.
+          </span>
+        </h1>
+        <p class="text-lg md:text-xl text-stone-400 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+          Drop raw footage into a folder. Your AI agent reads speech boundaries, grades color, cuts filler words, burns synchronized subtitles, and renders frame-perfect video with 30ms anti-pop audio fades.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+          <a href="#cli" class="px-6 py-3 rounded-lg bg-gradient-to-r from-brand-500 to-amber-600 hover:from-brand-600 hover:to-amber-700 text-white font-semibold text-sm shadow-lg shadow-brand-500/25 transition-all">
+            Quickstart &amp; CLI Commands
+          </a>
+          <a href="https://github.com/bhubbard/video-use-rs" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 transition-all">
+            GitHub Repository
+          </a>
+        </div>
+
+        <!-- Terminal Preview -->
+        <div class="max-w-2xl mx-auto text-left rounded-xl bg-stone-900 border border-stone-800 p-5 code-glow">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-stone-800 text-xs text-stone-500 font-mono">
+            <span>bash — video-use-rs</span>
+            <span class="text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              31 tests passing
+            </span>
+          </div>
+          <pre class="font-mono text-xs md:text-sm text-stone-300 leading-relaxed overflow-x-auto"><code><span class="text-stone-500"># Transcribe batch with 4 parallel Rayon workers</span>
 <span class="text-brand-400">video-use</span> transcribe-batch ./footage/ --workers 4
 
 <span class="text-stone-500"># Pack transcripts into phrase-level markdown for the LLM</span>
@@ -114,241 +231,294 @@
 
 <span class="text-stone-500"># Render the cut EDL with auto-subtitles &amp; 2-pass loudness normalization</span>
 <span class="text-brand-400">video-use</span> render ./footage/edit/edl.json -o final.mp4 --build-subtitles</code></pre>
-      </div>
-    </div>
-  </section>
-
-  <!-- Banner -->
-  <section class="max-w-6xl mx-auto px-6 py-12">
-    <div class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-      <img src="static/video-use-banner.png" alt="video-use banner" class="w-full h-auto object-cover">
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section id="how-it-works" class="py-16 md:py-24 border-b border-white/5">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="text-xs font-mono font-bold uppercase tracking-widest text-brand-400 mb-2">The Philosophy</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
-          The LLM never watches the video. It reads it.
-        </h2>
-        <p class="text-stone-400">
-          Naive video agents dump 30,000 frames into an LLM context (45M tokens of noise). video-use reduces an hour of footage into 12KB of structured speech text + on-demand visual composites.
-        </p>
-      </div>
-
-      <!-- Layer comparison cards -->
-      <div class="grid md:grid-cols-2 gap-8 mb-16">
-        <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/10">
-          <div class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center font-mono font-bold mb-5">
-            L1
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">Layer 1 — Audio Transcript (Always Loaded)</h3>
-          <p class="text-sm text-stone-400 mb-4 leading-relaxed">
-            One ElevenLabs Scribe call gives word-level timestamps, speaker diarization, and audio events like <code class="text-stone-300 font-mono">(laughter)</code> and <code class="text-stone-300 font-mono">(applause)</code>. All takes pack into a compact <code class="text-stone-300 font-mono">takes_packed.md</code>.
-          </p>
-          <div class="p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-xs text-stone-300">
-            <span class="text-brand-400">## C0103</span> (duration: 43.0s, 8 phrases)<br>
-            &nbsp;&nbsp;[002.52-005.36] S0 Ninety percent of what a web agent does is wasted.<br>
-            &nbsp;&nbsp;[006.08-006.74] S0 We fixed this.
-          </div>
-        </div>
-
-        <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/10">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold mb-5">
-            L2
-          </div>
-          <h3 class="text-xl font-bold text-white mb-2">Layer 2 — Visual Composite (On Demand)</h3>
-          <p class="text-sm text-stone-400 mb-4 leading-relaxed">
-            <code class="text-stone-300 font-mono">video-use timeline-view</code> produces a filmstrip + waveform + word labels PNG for any target time range. Called only at decision points — ambiguous pauses, retake comparisons, or cut validation.
-          </p>
-          <div class="p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-xs text-stone-300">
-            <span class="text-amber-400">$ video-use timeline-view</span> take.mp4 42.0 48.0 -o verify.png<br>
-            extracting 10 frames from 42.00s to 48.00s<br>
-            saved: "verify.png" (190 KB)
-          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Diagram showcase -->
-      <div class="rounded-2xl overflow-hidden border border-white/10 bg-stone-900/60 p-6 md:p-8">
-        <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
-          <span class="text-xs font-mono text-stone-400">timeline_view composite — filmstrip + speaker track + waveform + word labels + silence gaps</span>
-          <span class="text-xs font-mono px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 border border-brand-500/30">SVG DIAGRAM</span>
-        </div>
-        <img src="static/timeline-view.svg" alt="Timeline view diagram" class="w-full h-auto">
-      </div>
-    </div>
-  </section>
+    <!-- Banner Image with Accessible Figure -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <figure class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-stone-950">
+        <img src="static/video-use-banner.png" alt="video-use-rs banner showcasing AI video editing in Rust" width="1894" height="1352" class="w-full h-auto object-cover" loading="eager" fetchpriority="high">
+        <figcaption class="sr-only">video-use-rs banner showcasing AI conversation-driven video editing in Rust</figcaption>
+      </figure>
+    </section>
 
-  <!-- CLI Reference -->
-  <section id="cli" class="py-16 md:py-24 border-b border-white/5 bg-white/[0.01]">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="text-xs font-mono font-bold uppercase tracking-widest text-brand-400 mb-2">CLI Suite</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
-          Single Native Binary
-        </h2>
-        <p class="text-stone-400">
-          No Python interpreters, no virtualenvs, no dependency drift. One fast binary compiled directly for macOS and Linux.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Card 1 -->
-        <div class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
-          <div class="text-xs font-mono text-brand-400 mb-2">TRANSCRIPTION</div>
-          <h3 class="text-lg font-bold text-white mb-2">transcribe &amp; batch</h3>
-          <p class="text-xs text-stone-400 mb-4">
-            Uploads 16kHz mono audio to ElevenLabs Scribe. Verifies peak dBFS to prevent paying for silent tracks. Cached per source.
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 md:py-24 border-b border-white/5">
+      <div class="max-w-6xl mx-auto px-6">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+          <div class="text-xs font-mono font-bold uppercase tracking-widest text-brand-400 mb-2">The Architecture</div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
+            The LLM Never Watches the Video. It Reads It.
+          </h2>
+          <p class="text-stone-400">
+            Naive video agents dump 30,000 frames into an LLM context (45M tokens of noise). video-use reduces an hour of footage into 12KB of structured speech text + on-demand visual composites.
           </p>
-          <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use transcribe video.mp4 \
+        </header>
+
+        <!-- Layer comparison cards -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+          <article class="p-8 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center font-mono font-bold mb-5">
+              L1
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Layer 1 — Audio Transcript (Always Loaded)</h3>
+            <p class="text-sm text-stone-400 mb-4 leading-relaxed">
+              One ElevenLabs Scribe call gives word-level timestamps, speaker diarization, and audio events like <code class="text-stone-300 font-mono">(laughter)</code> and <code class="text-stone-300 font-mono">(applause)</code>. All takes pack into a compact <code class="text-stone-300 font-mono">takes_packed.md</code>.
+            </p>
+            <div class="p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-xs text-stone-300">
+              <span class="text-brand-400">## C0103</span> (duration: 43.0s, 8 phrases)<br>
+              &nbsp;&nbsp;[002.52-005.36] S0 Ninety percent of what a web agent does is wasted.<br>
+              &nbsp;&nbsp;[006.08-006.74] S0 We fixed this.
+            </div>
+          </article>
+
+          <article class="p-8 rounded-2xl bg-white/[0.02] border border-white/10">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold mb-5">
+              L2
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Layer 2 — Visual Composite (On Demand)</h3>
+            <p class="text-sm text-stone-400 mb-4 leading-relaxed">
+              <code class="text-stone-300 font-mono">video-use timeline-view</code> produces a filmstrip + waveform + word labels PNG for any target time range. Called only at decision points — ambiguous pauses, retake comparisons, or cut validation.
+            </p>
+            <div class="p-4 rounded-xl bg-black/40 border border-white/5 font-mono text-xs text-stone-300">
+              <span class="text-amber-400">$ video-use timeline-view</span> take.mp4 42.0 48.0 -o verify.png<br>
+              extracting 10 frames from 42.00s to 48.00s<br>
+              saved: "verify.png" (190 KB)
+            </div>
+          </article>
+        </div>
+
+        <!-- Diagram Showcase -->
+        <figure class="rounded-2xl overflow-hidden border border-white/10 bg-stone-900/60 p-6 md:p-8">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+            <span class="text-xs font-mono text-stone-400">timeline_view composite — filmstrip + speaker track + waveform + word labels + silence gaps</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 border border-brand-500/30">SVG DIAGRAM</span>
+          </div>
+          <img src="static/timeline-view.svg" alt="timeline_view composite visualization showing filmstrip, audio envelope waveform, speaker track, and silence gaps" width="1100" height="460" class="w-full h-auto" loading="lazy">
+          <figcaption class="mt-4 text-center text-xs text-stone-500 font-mono">
+            Figure 1: On-demand visual composite generated by video-use-rs during cut verification.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CLI Reference Section -->
+    <section id="cli" class="py-16 md:py-24 border-b border-white/5 bg-white/[0.01]">
+      <div class="max-w-6xl mx-auto px-6">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+          <div class="text-xs font-mono font-bold uppercase tracking-widest text-brand-400 mb-2">CLI Suite</div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
+            Single Native Binary Architecture
+          </h2>
+          <p class="text-stone-400">
+            No Python interpreters, no virtualenvs, no dependency drift. One fast binary compiled directly for macOS, Linux, and Windows.
+          </p>
+        </header>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
+            <div class="text-xs font-mono text-brand-400 mb-2">SPEECH RECOGNITION</div>
+            <h3 class="text-lg font-bold text-white mb-2">transcribe &amp; batch</h3>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">
+              Extracts 16kHz mono audio via ffmpeg, checks peak dBFS to prevent uploading digital silence (&lt; -60 dBFS), and sends multipart requests to ElevenLabs Scribe.
+            </p>
+            <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use transcribe video.mp4 \
   --audio-track 0
 
 video-use transcribe-batch ./takes/ \
   --workers 4</code></pre>
-        </div>
+          </article>
 
-        <!-- Card 2 -->
-        <div class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
-          <div class="text-xs font-mono text-brand-400 mb-2">TRANSCRIPT PACKING</div>
-          <h3 class="text-lg font-bold text-white mb-2">pack-transcripts</h3>
-          <p class="text-xs text-stone-400 mb-4">
-            Walks Scribe JSON files and emits <code class="text-stone-300">takes_packed.md</code>, breaking phrases on silences &ge; 0.5s or speaker shifts.
-          </p>
-          <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use pack-transcripts \
+          <article class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
+            <div class="text-xs font-mono text-brand-400 mb-2">PROMPT CONDENSATION</div>
+            <h3 class="text-lg font-bold text-white mb-2">pack-transcripts</h3>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">
+              Walks Scribe JSON files and emits <code class="text-stone-300">takes_packed.md</code>, breaking phrases on silences &ge; 0.5s or speaker shifts.
+            </p>
+            <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use pack-transcripts \
   --edit-dir ./edit \
   --silence-threshold 0.5</code></pre>
-        </div>
+          </article>
 
-        <!-- Card 3 -->
-        <div class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
-          <div class="text-xs font-mono text-brand-400 mb-2">COLOR GRADING</div>
-          <h3 class="text-lg font-bold text-white mb-2">grade</h3>
-          <p class="text-xs text-stone-400 mb-4">
-            Presets (<code class="text-stone-300">subtle</code>, <code class="text-stone-300">neutral_punch</code>, <code class="text-stone-300">warm_cinematic</code>) or data-driven auto mode via ffmpeg <code class="text-stone-300">signalstats</code>.
-          </p>
-          <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use grade clip.mp4 \
+          <article class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
+            <div class="text-xs font-mono text-brand-400 mb-2">COLOR GRADING</div>
+            <h3 class="text-lg font-bold text-white mb-2">grade</h3>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">
+              Presets (<code class="text-stone-300">subtle</code>, <code class="text-stone-300">neutral_punch</code>, <code class="text-stone-300">warm_cinematic</code>) or data-driven auto mode via ffmpeg <code class="text-stone-300">signalstats</code>.
+            </p>
+            <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use grade clip.mp4 \
   -o graded.mp4 --preset subtle
 
 video-use grade --analyze clip.mp4</code></pre>
-        </div>
+          </article>
 
-        <!-- Card 4 -->
-        <div class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
-          <div class="text-xs font-mono text-brand-400 mb-2">CUT &amp; COMPOSE</div>
-          <h3 class="text-lg font-bold text-white mb-2">render</h3>
-          <p class="text-xs text-stone-400 mb-4">
-            Per-segment extract with 30ms audio fades, lossless concat, overlay timing sync, subtitles last, and two-pass loudness norm.
-          </p>
-          <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use render edl.json \
+          <article class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
+            <div class="text-xs font-mono text-brand-400 mb-2">CUT &amp; COMPOSE</div>
+            <h3 class="text-lg font-bold text-white mb-2">render</h3>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">
+              Per-segment extract with 30ms audio fades, lossless concat, overlay timing sync, subtitles last, and two-pass loudness norm.
+            </p>
+            <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use render edl.json \
   -o final.mp4 --build-subtitles
 
 video-use render edl.json \
   -o preview.mp4 --preview</code></pre>
-        </div>
+          </article>
 
-        <!-- Card 5 -->
-        <div class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
-          <div class="text-xs font-mono text-brand-400 mb-2">VISUAL INSPECTION</div>
-          <h3 class="text-lg font-bold text-white mb-2">timeline-view</h3>
-          <p class="text-xs text-stone-400 mb-4">
-            Filmstrip + waveform composite PNG for checking ambiguous pauses, retakes, and cut-point sanity without dumping full frames.
-          </p>
-          <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use timeline-view \
+          <article class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
+            <div class="text-xs font-mono text-brand-400 mb-2">VISUAL INSPECTION</div>
+            <h3 class="text-lg font-bold text-white mb-2">timeline-view</h3>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">
+              Filmstrip + waveform composite PNG for checking ambiguous pauses, retakes, and cut-point sanity without dumping full frames.
+            </p>
+            <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>video-use timeline-view \
   clip.mp4 12.0 16.5 \
   --n-frames 10</code></pre>
-        </div>
+          </article>
 
-        <!-- Card 6 -->
-        <div class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
-          <div class="text-xs font-mono text-brand-400 mb-2">EMBEDDABLE CRATE</div>
-          <h3 class="text-lg font-bold text-white mb-2">Rust Library</h3>
-          <p class="text-xs text-stone-400 mb-4">
-            Import <code class="text-stone-300">video_use</code> into your own agent, web service, or media pipeline with full typed Rust APIs.
-          </p>
-          <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>use video_use::{
+          <article class="p-6 rounded-xl bg-stone-900/80 border border-white/10">
+            <div class="text-xs font-mono text-brand-400 mb-2">EMBEDDABLE CRATE</div>
+            <h3 class="text-lg font-bold text-white mb-2">Rust Library</h3>
+            <p class="text-xs text-stone-400 mb-4 leading-relaxed">
+              Import <code class="text-stone-300">video_use</code> into your own agent, web service, or media pipeline with full typed Rust APIs.
+            </p>
+            <pre class="font-mono text-xs bg-black/50 p-3 rounded-lg text-stone-300 overflow-x-auto"><code>use video_use::{
   render_edl, RenderOptions,
   chunk_words, parse_fps,
 };</code></pre>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Hard Rules -->
-  <section id="rules" class="py-16 md:py-24 border-b border-white/5">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <div class="text-xs font-mono font-bold uppercase tracking-widest text-brand-400 mb-2">Correctness Mandates</div>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
-          Production-Correctness Rules
-        </h2>
-        <p class="text-stone-400">
-          These rules are baked directly into the Rust implementation. Deviation produces broken audio pops, hidden captions, or degraded encodes.
-        </p>
+    <!-- Hard Rules Section -->
+    <section id="rules" class="py-16 md:py-24 border-b border-white/5">
+      <div class="max-w-6xl mx-auto px-6">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+          <div class="text-xs font-mono font-bold uppercase tracking-widest text-brand-400 mb-2">Correctness Mandates</div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
+            Production-Correctness Rules
+          </h2>
+          <p class="text-stone-400">
+            These rules are baked directly into the Rust implementation. Deviation produces broken audio pops, hidden captions, or degraded encodes.
+          </p>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
+            <span class="font-mono text-brand-400 font-bold">01</span>
+            <div>
+              <h3 class="font-bold text-white mb-1">Subtitles Applied LAST</h3>
+              <p class="text-stone-400 text-xs">Subtitles are rendered after all animation overlays in the filter chain so captions are never occluded.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
+            <span class="font-mono text-brand-400 font-bold">02</span>
+            <div>
+              <h3 class="font-bold text-white mb-1">Per-Segment Extract &rarr; Lossless Concat</h3>
+              <p class="text-stone-400 text-xs">Uses ffmpeg concat demuxer (<code class="text-stone-300 font-mono">-c copy</code>) instead of a monolithic filtergraph to avoid double-encoding.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
+            <span class="font-mono text-brand-400 font-bold">03</span>
+            <div>
+              <h3 class="font-bold text-white mb-1">30ms Audio Fades at Every Boundary</h3>
+              <p class="text-stone-400 text-xs">Bakes <code class="text-stone-300 font-mono">afade=t=in:st=0:d=0.03,afade=t=out...</code> into every segment to eliminate audible cut pops.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
+            <span class="font-mono text-brand-400 font-bold">04</span>
+            <div>
+              <h3 class="font-bold text-white mb-1">PTS-Shifted Overlays</h3>
+              <p class="text-stone-400 text-xs">Overlays apply <code class="text-stone-300 font-mono">setpts=PTS-STARTPTS+T/TB</code> so frame 0 lands precisely at the window start.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
+            <span class="font-mono text-brand-400 font-bold">05</span>
+            <div>
+              <h3 class="font-bold text-white mb-1">Output-Timeline Subtitle Offsets</h3>
+              <p class="text-stone-400 text-xs"><code class="text-stone-300 font-mono">out_time = word.start - seg_start + seg_offset</code> ensures captions stay in sync across concatenated takes.</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
+            <span class="font-mono text-brand-400 font-bold">06</span>
+            <div>
+              <h3 class="font-bold text-white mb-1">Social-Ready Loudness Normalization</h3>
+              <p class="text-stone-400 text-xs">Targeting <code class="text-stone-300 font-mono">-14 LUFS</code> integrated, <code class="text-stone-300 font-mono">-1 dBTP</code> peak, and <code class="text-stone-300 font-mono">LRA 11</code> via two-pass loudnorm.</p>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="grid md:grid-cols-2 gap-4 text-sm">
-        <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
-          <span class="font-mono text-brand-400 font-bold">01</span>
-          <div>
-            <h4 class="font-bold text-white mb-1">Subtitles Applied LAST</h4>
-            <p class="text-stone-400 text-xs">Subtitles are rendered after all animation overlays in the filter chain so captions are never occluded.</p>
-          </div>
-        </div>
+    <!-- FAQ Section (Search Engine & User Rich Snippets) -->
+    <section id="faq" class="py-16 md:py-24 border-b border-white/5 bg-white/[0.01]">
+      <div class="max-w-4xl mx-auto px-6">
+        <header class="text-center mb-12">
+          <div class="text-xs font-mono font-bold uppercase tracking-widest text-brand-400 mb-2">Questions &amp; Answers</div>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight mb-3">Frequently Asked Questions</h2>
+          <p class="text-stone-400 text-sm">Everything you need to know about video-use-rs, AI video editing, and production deployment.</p>
+        </header>
 
-        <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
-          <span class="font-mono text-brand-400 font-bold">02</span>
-          <div>
-            <h4 class="font-bold text-white mb-1">Per-Segment Extract &rarr; Lossless Concat</h4>
-            <p class="text-stone-400 text-xs">Uses ffmpeg concat demuxer (<code class="text-stone-300 font-mono">-c copy</code>) instead of a monolithic filtergraph to avoid double-encoding.</p>
-          </div>
-        </div>
+        <div class="space-y-4">
+          <details class="group p-5 rounded-xl bg-stone-900/70 border border-white/10 hover:border-white/20 transition-all open:bg-stone-900">
+            <summary class="flex items-center justify-between font-bold text-white cursor-pointer list-none">
+              <span>What is video-use-rs?</span>
+              <span class="text-brand-400 group-open:rotate-180 transition-transform text-lg">&darr;</span>
+            </summary>
+            <p class="mt-3 text-stone-300 text-sm leading-relaxed">
+              video-use-rs is a high-performance Rust port of browser-use/video-use. It allows developers and autonomous AI coding agents (Claude Code, Codex, Antigravity) to edit videos conversationally by reading word-level transcripts, detecting silence gaps, auto-grading color, and rendering frame-accurate video with ffmpeg.
+            </p>
+          </details>
 
-        <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
-          <span class="font-mono text-brand-400 font-bold">03</span>
-          <div>
-            <h4 class="font-bold text-white mb-1">30ms Audio Fades at Every Boundary</h4>
-            <p class="text-stone-400 text-xs">Bakes <code class="text-stone-300 font-mono">afade=t=in:st=0:d=0.03,afade=t=out...</code> into every segment to eliminate audible cut pops.</p>
-          </div>
-        </div>
+          <details class="group p-5 rounded-xl bg-stone-900/70 border border-white/10 hover:border-white/20 transition-all open:bg-stone-900">
+            <summary class="flex items-center justify-between font-bold text-white cursor-pointer list-none">
+              <span>How does an LLM edit video without watching every frame?</span>
+              <span class="text-brand-400 group-open:rotate-180 transition-transform text-lg">&darr;</span>
+            </summary>
+            <p class="mt-3 text-stone-300 text-sm leading-relaxed">
+              Instead of passing tens of thousands of video frames into an LLM context (costing tens of millions of tokens), video-use-rs provides a structured 12KB phrase-level transcript with exact word timestamps and silence boundaries. The agent only requests visual timeline composites on demand at specific decision points.
+            </p>
+          </details>
 
-        <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
-          <span class="font-mono text-brand-400 font-bold">04</span>
-          <div>
-            <h4 class="font-bold text-white mb-1">PTS-Shifted Overlays</h4>
-            <p class="text-stone-400 text-xs">Overlays apply <code class="text-stone-300 font-mono">setpts=PTS-STARTPTS+T/TB</code> so frame 0 lands precisely at the window start.</p>
-          </div>
-        </div>
+          <details class="group p-5 rounded-xl bg-stone-900/70 border border-white/10 hover:border-white/20 transition-all open:bg-stone-900">
+            <summary class="flex items-center justify-between font-bold text-white cursor-pointer list-none">
+              <span>Why was video-use ported to Rust?</span>
+              <span class="text-brand-400 group-open:rotate-180 transition-transform text-lg">&darr;</span>
+            </summary>
+            <p class="mt-3 text-stone-300 text-sm leading-relaxed">
+              The original Python scripts required complex environments (requests, librosa, matplotlib, pillow, numpy). The Rust port packages all functionality into a single standalone binary and embeddable crate with parallel Rayon workers, instant execution, zero runtime dependencies, and memory safety.
+            </p>
+          </details>
 
-        <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
-          <span class="font-mono text-brand-400 font-bold">05</span>
-          <div>
-            <h4 class="font-bold text-white mb-1">Output-Timeline Subtitle Offsets</h4>
-            <p class="text-stone-400 text-xs"><code class="text-stone-300 font-mono">out_time = word.start - seg_start + seg_offset</code> ensures captions stay in sync across concatenated takes.</p>
-          </div>
-        </div>
-
-        <div class="p-5 rounded-xl bg-stone-900/50 border border-white/5 flex gap-4">
-          <span class="font-mono text-brand-400 font-bold">06</span>
-          <div>
-            <h4 class="font-bold text-white mb-1">Social-Ready Loudness Normalization</h4>
-            <p class="text-stone-400 text-xs">Targeting <code class="text-stone-300 font-mono">-14 LUFS</code> integrated, <code class="text-stone-300 font-mono">-1 dBTP</code> peak, and <code class="text-stone-300 font-mono">LRA 11</code> via two-pass loudnorm.</p>
-          </div>
+          <details class="group p-5 rounded-xl bg-stone-900/70 border border-white/10 hover:border-white/20 transition-all open:bg-stone-900">
+            <summary class="flex items-center justify-between font-bold text-white cursor-pointer list-none">
+              <span>Does video-use-rs re-encode entire videos during cuts?</span>
+              <span class="text-brand-400 group-open:rotate-180 transition-transform text-lg">&darr;</span>
+            </summary>
+            <p class="mt-3 text-stone-300 text-sm leading-relaxed">
+              No. video-use-rs follows Hard Rule 2: it extracts only the specified cut ranges with 30ms anti-pop audio fades and color grading, and then combines them using ffmpeg's lossless concat demuxer (<code class="text-stone-300 font-mono">-c copy</code>), ensuring maximum speed and visual fidelity.
+            </p>
+          </details>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="py-12 border-t border-white/10 text-center text-xs text-stone-500 font-mono">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>video-use-rs &mdash; MIT License</div>
+      <div>video-use-rs &mdash; MIT License &bull; Created by Brandon Hubbard</div>
       <div class="flex items-center gap-6">
-        <a href="https://github.com/bhubbard/video-use-rs" class="hover:text-stone-300 transition-colors">GitHub Repository</a>
-        <a href="https://github.com/browser-use/video-use" class="hover:text-stone-300 transition-colors">Original Python Project</a>
+        <a href="https://github.com/bhubbard/video-use-rs" target="_blank" rel="noopener noreferrer" class="hover:text-stone-300 transition-colors">GitHub Repository</a>
+        <a href="https://github.com/browser-use/video-use" target="_blank" rel="noopener noreferrer" class="hover:text-stone-300 transition-colors">Original Python Project</a>
+        <a href="sitemap.xml" class="hover:text-stone-300 transition-colors">Sitemap</a>
       </div>
     </div>
   </footer>
