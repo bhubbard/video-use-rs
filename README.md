@@ -251,6 +251,38 @@ Automated CI runs on every push and pull request via GitHub Actions ([`.github/w
 
 ---
 
+## Performance Benchmarks (Rust vs Python)
+
+Detailed empirical benchmarks comparing `video-use-rs` against the original Python `video-use` are recorded in [BENCHMARKS.md](BENCHMARKS.md).
+
+### 1. CLI Invocation Latency
+
+| Subcommand | Original Python | `video-use-rs` | Speedup | Memory Reduction |
+| :--- | :---: | :---: | :---: | :---: |
+| `grade (--help)` | 235.63 ms | **9.48 ms** | **24.9x faster** | **3.1x lower** (6.9 MB vs 21.3 MB) |
+| `timeline-view (--help)` | 133.08 ms | **9.24 ms** | **14.4x faster** | **5.2x lower** (6.9 MB vs 35.5 MB) |
+| `render (--help)` | 75.83 ms | **9.15 ms** | **8.3x faster** | **3.3x lower** (6.9 MB vs 22.7 MB) |
+| `pack-transcripts (--help)` | 57.32 ms | **7.87 ms** | **7.3x faster** | **2.9x lower** (6.9 MB vs 19.9 MB) |
+
+### 2. Scribe Transcript Processing & Phrase Packing
+
+| Workload | Python Time | Rust Time | Speedup | Rust Throughput |
+| :--- | :---: | :---: | :---: | :---: |
+| 10 clips (10,000 words) | 73.69 ms | **16.27 ms** | **4.5x faster** | **614,590 words/sec** |
+| 50 clips (50,000 words) | 120.91 ms | **38.32 ms** | **3.2x faster** | **1,304,876 words/sec** |
+| 100 clips (150,000 words) | 244.70 ms | **93.24 ms** | **2.6x faster** | **1,608,684 words/sec** |
+
+### Reproducing Benchmarks
+
+To re-run the benchmark suite locally:
+
+```bash
+cargo build --release
+python3 benches/benchmark.py
+```
+
+---
+
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.

@@ -176,6 +176,7 @@
         <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
         <a href="#cli" class="hover:text-white transition-colors">CLI Suite</a>
         <a href="#rules" class="hover:text-white transition-colors">Hard Rules</a>
+        <a href="#benchmarks" class="hover:text-white transition-colors text-amber-400 font-semibold">Benchmarks</a>
         <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
       </nav>
       <div class="flex items-center gap-4">
@@ -209,6 +210,9 @@
           <a href="#cli" class="px-6 py-3 rounded-lg bg-gradient-to-r from-brand-500 to-amber-600 hover:from-brand-600 hover:to-amber-700 text-white font-semibold text-sm shadow-lg shadow-brand-500/25 transition-all">
             Quickstart &amp; CLI Commands
           </a>
+          <a href="#benchmarks" class="px-6 py-3 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-semibold text-sm border border-amber-500/30 transition-all">
+            📊 View Benchmarks (up to 25x faster)
+          </a>
           <a href="https://github.com/bhubbard/video-use-rs" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 transition-all">
             GitHub Repository
           </a>
@@ -220,7 +224,7 @@
             <span>bash — video-use-rs</span>
             <span class="text-emerald-400 flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              31 tests passing
+              37 tests passing
             </span>
           </div>
           <pre class="font-mono text-xs md:text-sm text-stone-300 leading-relaxed overflow-x-auto"><code><span class="text-stone-500"># Transcribe batch with 4 parallel Rayon workers</span>
@@ -451,6 +455,145 @@ video-use render edl.json \
             <div>
               <h3 class="font-bold text-white mb-1">Social-Ready Loudness Normalization</h3>
               <p class="text-stone-400 text-xs">Targeting <code class="text-stone-300 font-mono">-14 LUFS</code> integrated, <code class="text-stone-300 font-mono">-1 dBTP</code> peak, and <code class="text-stone-300 font-mono">LRA 11</code> via two-pass loudnorm.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Benchmarks Section -->
+    <section id="benchmarks" class="py-16 md:py-24 border-b border-white/5 bg-gradient-to-b from-stone-950 to-stone-900/40">
+      <div class="max-w-6xl mx-auto px-6">
+        <header class="text-center max-w-3xl mx-auto mb-16">
+          <div class="text-xs font-mono font-bold uppercase tracking-widest text-amber-400 mb-2">Empirical Benchmarks</div>
+          <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+            Rust vs Original Python
+          </h2>
+          <p class="text-stone-400 text-sm md:text-base leading-relaxed">
+            Head-to-head performance benchmarks measured on Apple Silicon under identical workloads comparing the compiled native Rust release binary against the original Python implementation.
+          </p>
+        </header>
+
+        <!-- Stat Highlight Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div class="p-5 rounded-xl bg-stone-900/90 border border-white/10 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold text-amber-400 font-mono mb-1">24.9x</div>
+            <div class="text-xs text-stone-400 font-medium">Faster CLI Startup</div>
+            <div class="text-[11px] text-stone-500 font-mono mt-1">9.48ms vs 235.6ms</div>
+          </div>
+          <div class="p-5 rounded-xl bg-stone-900/90 border border-white/10 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold text-emerald-400 font-mono mb-1">1.6M</div>
+            <div class="text-xs text-stone-400 font-medium">Words / Second</div>
+            <div class="text-[11px] text-stone-500 font-mono mt-1">Scribe parsing throughput</div>
+          </div>
+          <div class="p-5 rounded-xl bg-stone-900/90 border border-white/10 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold text-brand-400 font-mono mb-1">6.9 MB</div>
+            <div class="text-xs text-stone-400 font-medium">Rust Base RSS</div>
+            <div class="text-[11px] text-stone-500 font-mono mt-1">up to 5.2x lower memory</div>
+          </div>
+          <div class="p-5 rounded-xl bg-stone-900/90 border border-white/10 text-center">
+            <div class="text-3xl md:text-4xl font-extrabold text-cyan-400 font-mono mb-1">100%</div>
+            <div class="text-xs text-stone-400 font-medium">Output Parity</div>
+            <div class="text-[11px] text-stone-500 font-mono mt-1">Identical filters &amp; cuts</div>
+          </div>
+        </div>
+
+        <!-- Benchmark Tables -->
+        <div class="space-y-8">
+          <div class="rounded-xl border border-white/10 overflow-hidden bg-stone-900/50">
+            <div class="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+              <span class="font-bold text-sm text-white">CLI Invocation &amp; Startup Latency</span>
+              <span class="text-xs font-mono text-stone-400">15 trials / subcommand</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-stone-300 font-mono">
+                <thead class="bg-black/40 text-stone-400 border-b border-white/5 uppercase tracking-wider text-[11px]">
+                  <tr>
+                    <th class="p-3">Command</th>
+                    <th class="p-3">Python Latency</th>
+                    <th class="p-3 text-amber-400">Rust Latency</th>
+                    <th class="p-3 text-emerald-400">Speedup</th>
+                    <th class="p-3">Memory (Py vs Rs)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">grade (--help)</td>
+                    <td class="p-3">235.63 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">9.48 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">24.9x faster</td>
+                    <td class="p-3">21.3 MB vs 6.9 MB (3.1x lower)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">timeline-view (--help)</td>
+                    <td class="p-3">133.08 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">9.24 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">14.4x faster</td>
+                    <td class="p-3">35.5 MB vs 6.9 MB (5.2x lower)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">render (--help)</td>
+                    <td class="p-3">75.83 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">9.15 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">8.3x faster</td>
+                    <td class="p-3">22.7 MB vs 6.9 MB (3.3x lower)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">pack-transcripts (--help)</td>
+                    <td class="p-3">57.32 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">7.87 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">7.3x faster</td>
+                    <td class="p-3">19.9 MB vs 6.9 MB (2.9x lower)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-white/10 overflow-hidden bg-stone-900/50">
+            <div class="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+              <span class="font-bold text-sm text-white">Transcript Processing &amp; Phrase Packing Throughput</span>
+              <span class="text-xs font-mono text-stone-400">Scribe JSON parsing &amp; silence segmentation</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-stone-300 font-mono">
+                <thead class="bg-black/40 text-stone-400 border-b border-white/5 uppercase tracking-wider text-[11px]">
+                  <tr>
+                    <th class="p-3">Workload</th>
+                    <th class="p-3">Python Time</th>
+                    <th class="p-3 text-amber-400">Rust Time</th>
+                    <th class="p-3 text-emerald-400">Speedup</th>
+                    <th class="p-3">Python Throughput</th>
+                    <th class="p-3 text-emerald-400">Rust Throughput</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">10 clips (10,000 words)</td>
+                    <td class="p-3">73.69 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">16.27 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">4.5x faster</td>
+                    <td class="p-3">135,699 w/s</td>
+                    <td class="p-3 text-emerald-400 font-bold">614,590 w/s</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">50 clips (50,000 words)</td>
+                    <td class="p-3">120.91 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">38.32 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">3.2x faster</td>
+                    <td class="p-3">413,546 w/s</td>
+                    <td class="p-3 text-emerald-400 font-bold">1,304,876 w/s</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">100 clips (150,000 words)</td>
+                    <td class="p-3">244.70 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">93.24 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">2.6x faster</td>
+                    <td class="p-3">613,000 w/s</td>
+                    <td class="p-3 text-emerald-400 font-bold">1,608,684 w/s</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
