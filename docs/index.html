@@ -596,6 +596,85 @@ video-use render edl.json \
               </table>
             </div>
           </div>
+
+          <div class="rounded-xl border border-white/10 overflow-hidden bg-stone-900/50">
+            <div class="px-5 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+              <span class="font-bold text-sm text-white">Media Processing &amp; Drill-Down Operations</span>
+              <span class="text-xs font-mono text-stone-400">Visual composite &amp; FFmpeg transcoding parity</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs text-stone-300 font-mono">
+                <thead class="bg-black/40 text-stone-400 border-b border-white/5 uppercase tracking-wider text-[11px]">
+                  <tr>
+                    <th class="p-3">Operation</th>
+                    <th class="p-3">Python Time</th>
+                    <th class="p-3 text-amber-400">Rust Time</th>
+                    <th class="p-3 text-emerald-400">Speedup</th>
+                    <th class="p-3">Output Parity / Notes</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">Timeline View (10-frame composite)</td>
+                    <td class="p-3">1,041.04 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">643.30 ms</td>
+                    <td class="p-3 text-emerald-400 font-bold">1.6x faster</td>
+                    <td class="p-3 text-stone-400 font-sans">Identical filmstrip + waveform envelope composite</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">Auto Color-Grade (20 frames signalstats)</td>
+                    <td class="p-3">213.87 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">210.00 ms</td>
+                    <td class="p-3 text-stone-400 font-bold">1.0x (ffmpeg bound)</td>
+                    <td class="p-3 text-stone-400 font-sans">Exact match down to 17 decimal places: eq=contrast=1.030:saturation=0.980</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="p-3 text-white font-sans font-semibold">EDL Render Engine (2 cuts + 30ms audio fades)</td>
+                    <td class="p-3">685.29 ms</td>
+                    <td class="p-3 text-amber-400 font-bold">741.83 ms</td>
+                    <td class="p-3 text-stone-400 font-bold">1.0x (ffmpeg bound)</td>
+                    <td class="p-3 text-stone-400 font-sans">Exact lossless concat stream parity</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Key Takeaways Grid -->
+          <div class="grid md:grid-cols-2 gap-4 mt-8">
+            <div class="p-5 rounded-xl bg-stone-900/60 border border-white/10">
+              <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                <span class="text-amber-400">⚡</span> Zero-Overhead Agent Invocations
+              </h4>
+              <p class="text-xs text-stone-400 leading-relaxed">
+                When autonomous agents (Claude Code, Antigravity, Codex) run commands in a loop, Python’s heavy import overhead (<code class="text-stone-300 font-mono">numpy</code>, <code class="text-stone-300 font-mono">PIL</code>, <code class="text-stone-300 font-mono">requests</code>) adds 130ms–235ms per call. Rust launches in <strong>7ms–9ms</strong> (up to <strong>25x faster</strong>).
+              </p>
+            </div>
+            <div class="p-5 rounded-xl bg-stone-900/60 border border-white/10">
+              <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                <span class="text-emerald-400">🚀</span> 1.6 Million Words/Second Throughput
+              </h4>
+              <p class="text-xs text-stone-400 leading-relaxed">
+                Rust parses multi-take Scribe JSON and groups speech into phrase-level markdown at over <strong>1,600,000 words per second</strong> via <code class="text-stone-300 font-mono">serde_json</code>, converting hours of raw footage in milliseconds.
+              </p>
+            </div>
+            <div class="p-5 rounded-xl bg-stone-900/60 border border-white/10">
+              <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                <span class="text-brand-400">📉</span> Up to 80% Memory Reduction
+              </h4>
+              <p class="text-xs text-stone-400 leading-relaxed">
+                Rust’s baseline resident set size stays under <strong>6.9 MB</strong> compared to Python’s 20 MB–36 MB baseline, freeing memory for parallel video rendering workers and large LLM context caches.
+              </p>
+            </div>
+            <div class="p-5 rounded-xl bg-stone-900/60 border border-white/10">
+              <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                <span class="text-cyan-400">🎯</span> 100% Mathematical Precision Parity
+              </h4>
+              <p class="text-xs text-stone-400 leading-relaxed">
+                Audio peak dBFS calculations, two-pass social loudness normalization (<code class="text-stone-300 font-mono">-14 LUFS</code>), display matrix rotation, and rational frame rate handling are strictly verified against the Python reference.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

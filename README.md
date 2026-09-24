@@ -253,24 +253,43 @@ Automated CI runs on every push and pull request via GitHub Actions ([`.github/w
 
 ## Performance Benchmarks (Rust vs Python)
 
-Detailed empirical benchmarks comparing `video-use-rs` against the original Python `video-use` are recorded in [BENCHMARKS.md](BENCHMARKS.md).
+Empirical benchmarks comparing `video-use-rs` against the original Python `video-use` were conducted on Apple Silicon under identical inputs and workloads. See the full report in [BENCHMARKS.md](BENCHMARKS.md).
 
-### 1. CLI Invocation Latency
+### 1. CLI Invocation Latency & Startup Overhead
 
-| Subcommand | Original Python | `video-use-rs` | Speedup | Memory Reduction |
+*Measured over 15 trials per subcommand with resident memory tracking.*
+
+| Subcommand | Original Python | `video-use-rs` (Rust) | Speedup | Python RSS | Rust RSS | Memory Reduction |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| `grade (--help)` | 235.63 ms | **9.48 ms** | **24.9x faster** | 21.3 MB | **6.9 MB** | **3.1x lower** |
+| `timeline-view (--help)` | 133.08 ms | **9.24 ms** | **14.4x faster** | 35.5 MB | **6.9 MB** | **5.2x lower** |
+| `render (--help)` | 75.83 ms | **9.15 ms** | **8.3x faster** | 22.7 MB | **6.9 MB** | **3.3x lower** |
+| `pack-transcripts (--help)` | 57.32 ms | **7.87 ms** | **7.3x faster** | 19.9 MB | **6.9 MB** | **2.9x lower** |
+
+### 2. Scribe Transcript Processing & Silence Segmentation
+
+*Parsing multi-take word timestamp JSON, detecting $\ge 0.5\text{s}$ silences & speaker changes, and generating phrase markdown.*
+
+| Workload | Python Time | Rust Time | Speedup | Python Throughput | Rust Throughput | Rust RSS |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **10 clips (10,000 words)** | 73.69 ms | **16.27 ms** | **4.5x faster** | 135,699 words/s | **614,590 words/s** | 8.3 MB |
+| **50 clips (50,000 words)** | 120.91 ms | **38.32 ms** | **3.2x faster** | 413,546 words/s | **1,304,876 words/s** | 9.8 MB |
+| **100 clips (150,000 words)** | 244.70 ms | **93.24 ms** | **2.6x faster** | 613,000 words/s | **1,608,684 words/s** | 13.0 MB |
+
+### 3. Media Processing & Drill-Down Operations
+
+| Operation | Python Time | Rust Time | Speedup | Parity / Accuracy |
 | :--- | :---: | :---: | :---: | :---: |
-| `grade (--help)` | 235.63 ms | **9.48 ms** | **24.9x faster** | **3.1x lower** (6.9 MB vs 21.3 MB) |
-| `timeline-view (--help)` | 133.08 ms | **9.24 ms** | **14.4x faster** | **5.2x lower** (6.9 MB vs 35.5 MB) |
-| `render (--help)` | 75.83 ms | **9.15 ms** | **8.3x faster** | **3.3x lower** (6.9 MB vs 22.7 MB) |
-| `pack-transcripts (--help)` | 57.32 ms | **7.87 ms** | **7.3x faster** | **2.9x lower** (6.9 MB vs 19.9 MB) |
+| **Timeline View (10-frame composite PNG)**<br>*(Frame extraction, 16kHz PCM WAV decoding, windowed RMS, composite)* | 1,041.04 ms | **643.30 ms** | **1.6x faster** | Identical visual filmstrip & audio waveform |
+| **Auto Color-Grade (20-frame signalstats)** | 213.87 ms | **210.00 ms** | **1.0x** *(ffmpeg bound)* | Exact match down to 17 decimal places |
+| **EDL Render Engine (2 cuts + 30ms fades)** | 685.29 ms | **741.83 ms** | **1.0x** *(ffmpeg bound)* | Exact lossless concat stream parity |
 
-### 2. Scribe Transcript Processing & Phrase Packing
+### Key Architectural Takeaways
 
-| Workload | Python Time | Rust Time | Speedup | Rust Throughput |
-| :--- | :---: | :---: | :---: | :---: |
-| 10 clips (10,000 words) | 73.69 ms | **16.27 ms** | **4.5x faster** | **614,590 words/sec** |
-| 50 clips (50,000 words) | 120.91 ms | **38.32 ms** | **3.2x faster** | **1,304,876 words/sec** |
-| 100 clips (150,000 words) | 244.70 ms | **93.24 ms** | **2.6x faster** | **1,608,684 words/sec** |
+1. **Zero-Overhead Agent Invocations**: In iterative agent loops (Claude Code, Antigravity, Codex), Python's import overhead (`numpy`, `PIL`, `requests`) adds **130ms – 235ms** of latency per tool call. Rust launches in **7ms – 9ms** (**up to 25x faster**).
+2. **Massive Parsing Throughput**: Rust processes **>1.6 million words per second** of Scribe speech JSON via `serde_json`, processing hours of raw footage in milliseconds.
+3. **Drastic Memory Savings**: Rust maintains a baseline memory footprint of **6.9 MB** (up to **5.2x lower** than Python's 35.5 MB), enabling safe concurrent execution across multiple worker threads.
+4. **100% Mathematical Parity**: Audio loudness normalization, signalstats histogram luminance/contrast formulas, and frame rate rational conversions match Python with zero regression.
 
 ### Reproducing Benchmarks
 
