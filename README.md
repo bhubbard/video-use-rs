@@ -1,8 +1,12 @@
 # video-use-rs
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-code.brandonhubbard.com-brightgreen?logo=github)](https://code.brandonhubbard.com/video-use-rs/)
+
 A fast, production-grade Rust port of [browser-use/video-use](https://github.com/browser-use/video-use) — the conversation-driven video editing toolkit.
 
 `video-use-rs` replaces the original Python helper scripts with a high-performance, single-binary CLI and reusable Rust library (`video_use`), providing complete support for the video-use editing pipeline.
+
+> 🎮 **Live Interactive Visualizer & Demo:** [video-use-rs on code.brandonhubbard.com](https://code.brandonhubbard.com/video-use-rs/)
 
 ---
 
