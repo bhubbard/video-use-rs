@@ -117,17 +117,18 @@ pub fn group_into_phrases(words: &[ScribeWord], silence_threshold: f64) -> Vec<P
             .replace(" ?", "?")
             .replace(" !", "!");
 
-        let last_word = current_words.last().unwrap();
-        let end_time = last_word.end.unwrap_or_else(|| {
-            last_word.start.unwrap_or(current_start.unwrap_or(0.0))
-        });
+        if let Some(last_word) = current_words.last() {
+            let end_time = last_word.end.unwrap_or_else(|| {
+                last_word.start.unwrap_or(current_start.unwrap_or(0.0))
+            });
 
-        phrases.push(Phrase {
-            start: current_start.unwrap_or(0.0),
-            end: end_time,
-            text,
-            speaker_id: current_speaker.take(),
-        });
+            phrases.push(Phrase {
+                start: current_start.unwrap_or(0.0),
+                end: end_time,
+                text,
+                speaker_id: current_speaker.take(),
+            });
+        }
 
         current_words.clear();
         *current_start = None;

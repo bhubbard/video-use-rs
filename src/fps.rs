@@ -4,6 +4,10 @@ use regex::Regex;
 use std::path::Path;
 use std::process::Command;
 use std::str::FromStr;
+use std::sync::LazyLock;
+
+static FPS_PATTERN: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^(?:[0-9]+(?:\.[0-9]+)?|[0-9]+/[0-9]+)$").unwrap());
 
 const MAX_COMPONENT: i64 = 2_147_483_647;
 
@@ -16,8 +20,7 @@ pub fn parse_fps(value: &str) -> Result<String> {
         bail!("FPS must be a positive number or rational, e.g. 30 or 30000/1001");
     }
 
-    let pattern = Regex::new(r"^(?:[0-9]+(?:\.[0-9]+)?|[0-9]+/[0-9]+)$").unwrap();
-    if !pattern.is_match(text) {
+    if !FPS_PATTERN.is_match(text) {
         bail!("FPS must be a positive number or rational, e.g. 30 or 30000/1001");
     }
 

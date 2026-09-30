@@ -12,6 +12,9 @@ use regex::Regex;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::sync::LazyLock;
+
+static IDENT_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^[a-zA-Z0-9_\-]+$").unwrap());
 
 pub fn resolve_grade_filter(grade_field: Option<&str>) -> String {
     let field = match grade_field {
@@ -23,8 +26,7 @@ pub fn resolve_grade_filter(grade_field: Option<&str>) -> String {
         return "__AUTO__".to_string();
     }
 
-    let ident_re = Regex::new(r"^[a-zA-Z0-9_\-]+$").unwrap();
-    if ident_re.is_match(field) {
+    if IDENT_RE.is_match(field) {
         match get_preset(field) {
             Ok(preset) => preset.to_string(),
             Err(_) => {
@@ -420,6 +422,7 @@ pub fn build_final_composite(
     Ok(())
 }
 
+#[derive(Debug)]
 pub struct RenderOptions<'a> {
     pub edl_path: &'a Path,
     pub output_path: &'a Path,

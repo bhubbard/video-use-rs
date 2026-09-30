@@ -10,3 +10,5 @@ edit/
 !docs/static/*.png
 !static/**/*.png
 !docs/static/**/*.png
+coverage_report
+target/coverage

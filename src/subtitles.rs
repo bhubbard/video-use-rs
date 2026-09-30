@@ -4,6 +4,9 @@ use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::sync::LazyLock;
+
+static WHITESPACE_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\s+").unwrap());
 
 pub const CHUNK_WORDS: usize = 2;
 pub const CHUNK_MAX_WORDS: usize = 3;
@@ -92,7 +95,6 @@ pub fn build_master_srt_from_ranges<F>(
 where
     F: Fn(&str) -> Result<Option<ScribeTranscript>>,
 {
-    let whitespace_re = Regex::new(r"\s+").unwrap();
     let mut entries: Vec<SrtCue> = Vec::new();
     let mut seg_offset = 0.0;
 
@@ -136,7 +138,7 @@ where
                 .filter(|s| !s.is_empty())
                 .collect();
             let raw_text = text_parts.join(" ");
-            let cleaned = whitespace_re.replace_all(&raw_text, " ").trim().to_string();
+            let cleaned = WHITESPACE_RE.replace_all(&raw_text, " ").trim().to_string();
             let stripped = cleaned.trim_end_matches([',', ';', ':']);
             let upper = stripped.to_uppercase();
 
@@ -150,7 +152,7 @@ where
         seg_offset += seg_duration;
     }
 
-    entries.sort_by(|a, b| a.start.partial_cmp(&b.start).unwrap());
+    entries.sort_by(|a, b| a.start.partial_cmp(&b.start).unwrap_or(std::cmp::Ordering::Equal));
 
     let mut lines = Vec::new();
     for (i, cue) in entries.iter().enumerate() {
